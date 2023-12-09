@@ -1,1 +1,4 @@
-flask
+pytest
+pylint
+black
+requests
