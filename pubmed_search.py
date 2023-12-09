@@ -68,11 +68,11 @@ def parse_xml(tree) -> list:
     return csv_rows
 
 
-def write(csv_rows: list, field_names: list, config) -> None:
+def write(csv_rows: list, field_names: list, out_csv: str ) -> None:
     """write extracted fields to file or stdout"""
 
-    if config.out_csv:
-        with open(config.out_csv, "w", encoding="utf-8") as csvfile:
+    if out_csv is not None:
+        with open(out_csv, "w", encoding="utf-8") as csvfile:
             csvwriter = csv.writer(csvfile, delimiter="\t")
             csvwriter.writerow(field_names)
             for row in csv_rows:
