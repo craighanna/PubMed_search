@@ -58,7 +58,7 @@ def parse_xml(tree) -> list:
                 pmid = aid.text
 
         abstract_element = article_meta.find("./{*}abstract")
-        if abstract_element:
+        if abstract_element is not None:
             abstract = "".join(abstract_element.itertext())
 
         article_url = f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/#abstract"
@@ -72,7 +72,7 @@ def write(csv_rows: list, field_names: list, config) -> None:
     """write extracted fields to file or stdout"""
 
     if config.out_csv:
-        with open(config.out_csv, "w") as csvfile:
+        with open(config.out_csv, "w", encoding="utf-8") as csvfile:
             csvwriter = csv.writer(csvfile, delimiter="\t")
             csvwriter.writerow(field_names)
             for row in csv_rows:
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     parser.add_argument("-s", "--set_str")
     args = parser.parse_args()
 
-    config = Config(
+    cfg = Config(
         args.metadata_prefix, args.from_dt, args.until_dt, args.set_str, args.out_csv
     )
-    run(config)
+    run(cfg)

@@ -3,7 +3,7 @@ install:
 		pip install -r requirements.txt
 
 test:
-	pytest -vv test_search_pubmed.py
+	pytest -vv test_pubmed_search.py
 
 format:
 	black *.py
